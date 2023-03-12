@@ -26,20 +26,10 @@ while True:
                                          minNeighbors=6,
                                          minSize=(60, 60),
                                          flags=cv2.CASCADE_SCALE_IMAGE)
-    print(faces ,"            " , faces)
-    # res = all(isinstance(ele, list) for ele in faces)
-    # print(res)
-    count = 0
+
 
     # res = all(isinstance(ele, list) for ele in faces[0])q
-    for i in faces:
-        count += 1
-    print(count)
-    if(warning>1):
-        exit("Sry more than members detected ur test is temporary banned")
-    if(count>1):
-        print("hey we have detected more than two members in ur screen this is the last warning>>>>>>>")
-        warning+=1
+
 
     # convert the input frame from BGR to RGB
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -48,7 +38,7 @@ while True:
     names = []
     # loop over the facial embeddings incase
     # we have multiple embeddings for multiple faces
-    counttts = 0
+    NAMES = ["Chakrika"]
     for encoding in encodings:
         # Compare encodings with encodings in data["encodings"]
         # Matches contain array with boolean values and True for the embeddings it matches closely
@@ -84,10 +74,11 @@ while True:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv2.putText(frame, name, (x, y), cv2.FONT_HERSHEY_SIMPLEX,
                         0.75, (0, 255, 0), 2)
-            print("huhuhuu")
-            counttts+=1
-        if(counttts>1):
-            SystemExit("more than one person")
+        if name in NAMES:
+            print("Acces granted.")
+        else:
+            print("You are not allowed.")
+
     cv2.imshow("Frame", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
